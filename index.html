@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Term 9">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f766e">
+<title>Term 9</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f766e'/%3E%3Ctext x='50' y='70' font-size='62' font-weight='700' text-anchor='middle' fill='white' font-family='sans-serif'%3E9%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f766e'/%3E%3Ctext x='50' y='70' font-size='62' font-weight='700' text-anchor='middle' fill='white' font-family='sans-serif'%3E9%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--tx:#0f172a;--mu:#64748b;--ln:#e2e8f0;--ac:#0f766e;--ok:#16a34a;--bad:#dc2626;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1220;--card:#162033;--tx:#e8edf5;--mu:#94a3b8;--ln:#26324a;--ac:#2dd4bf;color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
+body{padding:env(safe-area-inset-top) 0 calc(70px + env(safe-area-inset-bottom))}
+header{padding:14px 16px 6px}
+h1{margin:0;font-size:24px}
+.sub{color:var(--mu);font-size:13px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:8px 16px}
+.chip{flex:none;border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font-size:14px}
+.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.day{margin:10px 16px}
+.day h3{margin:0 0 6px;font-size:14px;color:var(--mu)}
+.it{background:var(--card);border:1px solid var(--ln);border-left:5px solid var(--c);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.top{display:flex;justify-content:space-between;font-size:12px;color:var(--mu)}
+.tag{color:var(--c);font-weight:700}
+.tp{margin:4px 0 2px;font-weight:600}
+.dr{font-size:13px;color:var(--mu)}
+.row{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+button{font:inherit;border:0;border-radius:10px;padding:8px 14px;background:var(--ac);color:#fff;font-weight:600}
+button.g{background:transparent;color:var(--mu);border:1px solid var(--ln)}
+button.ok{background:var(--ok)}button.no{background:var(--bad)}
+.st{font-size:13px;color:var(--mu)}
+.done{opacity:.95}.mast{border-left-color:gold}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;background:none;color:var(--mu);border-radius:0;padding:12px 4px;font-size:14px}
+nav button.on{color:var(--ac)}
+.bd{background:var(--bad);color:#fff;border-radius:10px;padding:1px 7px;font-size:12px;margin-left:4px}
+.pg{margin:12px 16px;background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px}
+.big{font-size:28px;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 16px}
+.grid .pg{margin:0}
+.bar{height:8px;background:var(--ln);border-radius:5px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--ac)}
+h2{margin:16px 16px 4px;font-size:16px}
+.empty{text-align:center;color:var(--mu);padding:30px 16px}
+</style></head><body>
+<header><h1>Term 9</h1><div class="sub">46th Batch · Paraclinical · 2 Nov 2026 – 29 Jan 2027</div></header>
+<div id="v"></div>
+<nav><button id="n0" onclick="tab(0)">📚 Subjects</button><button id="n1" onclick="tab(1)">🔁 Review<span id="bd"></span></button><button id="n2" onclick="tab(2)">📊 Progress</button></nav>
+<script>
+const RAW=`#
+0|1|P|Diseases of intrahepatic & extrahepatic bile ducts; gallbladder|Sivamayuran
+0|2|Pd|Vomiting|Sathiadas
+0|3|M|Viruses causing gastroenteritis|Valarmathy
+0|4|C|Drugs used in peptic ulcer disease|Sanchayan
+1|1|S|Congenital anomalies of oesophagus, stomach & duodenum; congenital anomalies of diaphragm|Sayanthan
+1|2|Pd|Diarrhoea|Sathiadas
+1|3|F|Forensic Medicine|Mayorathan
+1|4|P|Diseases of oral cavity, tongue & salivary glands|Thanenthiran
+2|1|S|Benign & malignant conditions of stomach|Gobishangar
+2|2|M|Hepatitis viruses 1|Kalamathy
+2|3-4|F|Forensic Medicine|Mayorathan
+3|1|S|Benign & malignant conditions of oesophagus|Sivamayuran
+3|2-3|D|Tutorial 6: Basic epidemiology & statistics|Coonghe
+3|4|M|Antimicrobial use in clinical practice I|Valarmathy
+4|1|M|Hepatitis viruses 2|Kalamathy
+4|2|P|Diseases of oesophagus & stomach – congenital, inflammatory, neoplastic|Thanenthiran
+4|3-4|O|PPDS|
+#
+0|1|P|Diseases of oesophagus & stomach – congenital, inflammatory, neoplastic|Thanenthiran
+0|2|F|Forensic Medicine|Mayorathan
+0|3|M|Zoonotic diseases|Kalamathy
+0|4|M|Antimicrobial use in clinical practice II|Valarmathy
+1|1|P|Diarrhoea & malabsorption|Thanenthiran
+1|2|M|HIV|Valarmathy
+1|3-4|F|Forensic Medicine|Mayorathan
+2|1|S|Peritonitis; abdominal & pelvic abscesses|Gobishangar
+2|2|D|Infectious diseases 1: Principles of communicable disease prevention|Ranchan
+2|3-4|F|Forensic Medicine|Mayorathan
+3|1|P|Diseases of intrahepatic & extrahepatic bile ducts; gallbladder|Sivamayuran
+3|2|M|Oncogenic viruses & prions|Kalamathy
+3|3|Pa|Mosquitoes|Kannathasan
+3|4|M|Enteric fever|Valarmathy
+4|1|S|Gastric outlet obstruction – adults & paediatric|Sayanthan
+4|2|C|Antiemetics & laxatives|Guruparan
+4|3|Pa|Mosquitoes|Kannathasan
+4|4|M|Antimicrobial use in clinical practice III|Valarmathy
+#
+0|1-2|O|CPT 1st In-Course Examination|
+0|3-4|O|Self learning|
+1|1-2|O|Pathology 1st In-Course Examination|
+1|3|F|Forensic Medicine|Mayorathan
+1|4|M|Abdominal infections|Kalamathy
+2|1-2|O|MDS: Hepatitis|
+2|3|F|Forensic Medicine|Mayorathan
+2|4|D|Infectious diseases 2: Outbreak investigation|Ranchan
+3|1-2|O|MDS: Hepatitis|
+3|3|Pa|Flies|Kannathasan
+3|4|P|Patterns of injury of the liver & common causes of chronic liver disease|Homathy
+4|1|S|Intestinal obstruction – acute, sub-acute & chronic causes, paediatric; pathophysiology|Sayanthan
+4|2|O|Self learning|
+4|3-4|O|PPDS Microbiology|Valarmathy
+#
+1|1-4|O|Holiday|
+0|1|M|Gastrointestinal infections 1|Valarmathy
+0|2|Pd|Abdominal pain|Sathiadas
+0|3|C|Typhoid fever, cholera, leptospirosis, brucellosis|Gajanthan
+0|4|P|Infections of the GIT|Thanenthiran
+2|1|S|Anal conditions (painful & painless) – fissure, carcinoma, incontinence, perianal abscess/fistula, rectal prolapse|Gobishangar
+2|2-3|C|CBL CVS Gr 3&4 (Gajanthan) · CBL RS Gr 1&2 (Athavan)|
+2|4|D|Infectious diseases 3: Epidemiology of common communicable diseases|Ranchan
+3|1|P|Inflammation of bone & fracture (injury and repair)|Sasikaran
+3|2|P|Hepatic necrosis, acute liver failure|Homathy
+3|3|C|Peptic ulcer & complications|Sujanitha
+3|4|Pa|Scabies|Kannathasan
+4|1|P|Chronic liver failure & cirrhosis|Homathy
+4|2|P|Coeliac disease, microscopic colitis|Thanenthiran
+4|3|M|Gastrointestinal infections 2|Valarmathy
+4|4|C|Antidiarrhoeal & probiotics|Guruparan
+#
+0|1-2|D|SPSS Workshop|Arumainathan / Claritan
+0|3|C|Typhoid fever, cholera, leptospirosis, brucellosis|Gajanthan
+0|4|C|Non-steroidal anti-inflammatory drugs|Sanchayan
+1|1-2|D|SPSS Workshop|Arumainathan / Claritan
+1|3|F|Forensic Medicine|Mayorathan
+1|4|P|Common non-infective skin pathology – eczema, psoriasis, melanocytic lesions, carcinoma|Thanenthiran
+2|1|S|Splenomegaly, hypersplenism & splenectomy|Gobishangar
+2|2-3|C|CBL CVS Gr 1&2 (Gajanthan) · CBL RS Gr 3&4 (Athavan)|
+2|4|F|Forensic Medicine|Mayorathan
+3|1-2|P|Inflammation of bone & fracture; metabolic bone disorders – osteoporosis, osteomalacia, rickets|Sasikaran
+3|3|Pa|Mites, ticks & fleas|Kannathasan
+3|4|C|Tutorial: Gastrointestinal system|Sanchayan
+4|1|P|Congenital abnormalities & obstruction of small and large intestines|Sayanthan
+4|2|P|Chronic liver failure & cirrhosis|Homathy
+4|3|P|Vascular disorders of the intestines|Thanenthiran
+4|4|C|Non-steroidal anti-inflammatory drugs|Sanchayan
+#
+0|1|S|Common surgical conditions of hepatobiliary system; carcinoma & endocrine tumours of pancreas|Sivamayuran
+0|2|Pd|Inflammatory bowel disease|Sathiadas
+0|3|C|Amoebiasis|Gajanthan
+0|4|M|Tutorial: Diarrhoeal illnesses Gr 3&4|Valarmathy
+1|1|S|Principles of management of fractures & dislocations; individual bone fractures|Sashikaran
+1|2|P|Common non-infective skin pathology – eczema, psoriasis, melanocytic lesions, carcinoma|Thanenthiran
+1|3|F|Forensic Medicine|Mayorathan
+1|4|M|Tutorial: Diarrhoeal illnesses Gr 3&4|Valarmathy
+2|1|D|Infectious diseases 4: Prevention & control of communicable diseases|Ranchan
+2|2|P|Inflammatory bowel disease & appendicitis|Gobishangar
+2|3|F|Forensic Medicine|Mayorathan
+2|4|M|Tutorial: Diarrhoeal illnesses Gr 1&2|Valarmathy
+3|1|P|Metabolic disorders of bone – osteoporosis, osteomalacia, rickets|Sasikaran
+3|2|P|Common non-infective skin pathology – eczema, psoriasis, melanocytic lesions, carcinoma|Thanenthiran
+3|3|C|Drugs used in inflammatory bowel disease|Navaratinaraja
+3|4|M|Tutorial: Diarrhoeal illnesses Gr 1&2|Valarmathy
+4|1|M|Infections in compromised host|Kalamathy
+4|2|C|Drugs used in rheumatoid arthritis & gout|Navaratinaraja
+4|3|P|Alcoholic liver disease, NAFLD & vascular disorders of liver|Homathy
+4|4|C|Quiz: Gastrointestinal system|Navaratinaraja
+#
+0|1|M|Skin, wound & soft tissue infections 1|Kalamathy
+0|2|Pd|Liver failure|Sathiadas
+0|3|C|Poisoning, overdose & antidote|Guruparan
+0|4|F|Forensic Medicine|Mayorathan
+1|1|S|Principles of management of fractures & dislocations; individual bone fractures|Sashikaran
+1|2|F|Forensic Medicine|Mayorathan
+1|3|P|Liver hyperplasia & neoplasia|Homathy
+1|4|M|Skin, wound & soft tissue infections 2|Kalamathy
+2|1|P|Liver function tests & jaundice|Homathy
+2|2|P|Neoplastic diseases of the intestines|Gobishangar
+2|3-4|D|Tutorial 8: Applied epidemiology & infectious diseases|Coonghe
+3|1|S|Infection of bone & joints; tumours of musculoskeletal system|Sashikaran
+3|2|P|Exocrine pancreas|Sivamayuran
+3|3|D|NCD 1: Epidemiological transition & dual burden of disease|Prithviraj
+3|4|D|NCD 2: Global, regional & local epidemiology of common NCDs|Prithviraj
+4|1|P|Tutorial: GIT pathology; liver, gallbladder, bile duct & pancreas pathology Gr 1&2|Dept staff
+4|2|F|Forensic Medicine Gr 3&4|Mayorathan
+4|3|Pa|Ectoparasites demonstration|Kannathasan
+4|4|P|Liver function tests & jaundice|Homathy
+#
+0|1|P|Exocrine pancreas|Sivamayuran
+0|2|M|Emerging infections|Kalamathy
+0|3|M|Hospital acquired infections I|Gajanthan
+0|4|O|Self learning|
+1|1|S|Infection of bone & joints; tumours of musculoskeletal system|Sashikaran
+1|2|D|NCD 3: National policies on NCD prevention & surveillance – 1|Prithviraj
+1|3|D|NCD 4: National policies on NCD prevention & surveillance – 2|Prithviraj
+1|4|F|Forensic Medicine|Mayorathan
+2|1|F|Forensic Medicine|Mayorathan
+2|2|P|Neoplastic diseases of the intestines|Gobishangar
+2|3-4|P|Tutorial: GIT, liver, gallbladder, bile duct & pancreas pathology Gr 3&4|Dept staff
+2|3-4|F|Forensic Medicine Gr 1&2|Mayorathan
+3|1|S|Sports injury – biomechanics, diagnosis & management|Sashikaran
+3|2|C|Rheumatoid arthritis & gout|Narani
+3|3|M|Hospital acquired infections II|Gajanthan
+3|4|Pa|Tutorial: Ectoparasites|Kannathasan
+4|1-4|O|Holiday|
+#
+0|1-2|M|Practical: Interpretation of microbiology reports & ABST Gr 1&2|Valarmathy
+0|1-2|P|Demonstration: GIT & liver macroscopic pathology Gr 3&4|Dept staff
+0|3|C|General management of poisoning & snake bite|Gajanthan
+0|4|Pa|Tutorials: Protozoan infections|Kannathasan
+1|1-2|O|Parasitology 3rd In-Course Examination|
+1|3-4|M|Practical: Interpretation of microbiology reports & ABST Gr 3&4|Valarmathy
+1|3-4|P|Demonstration: GIT & liver macroscopic pathology Gr 1&2|Dept staff
+2|1-2|P|Practical: GIT & liver microscopic pathology|Dept staff
+2|3|D|Special topics 1: Health promotion|Ramya Kumar
+2|4|F|Forensic Medicine|Mayorathan
+3|1-2|P|CPC: GIT|Sivamayuran
+3|3|C|Rheumatoid arthritis & gout|Narani
+3|4|D|Special topics 2: Gender & health|Ramya Kumar
+4|1-4|O|Holiday|
+#
+0|1|F|Forensic Medicine|Mayorathan
+0|2|F|Forensic Medicine|Mayorathan
+0|3|M|Tutorial: Clinical microbiology Gr 1&2|Valarmathy
+0|4|P|Practical: Bone, joint, soft tissue & skin pathology Gr 3&4|Dept staff
+1|1|S|The spine & vertebral column|Sashikaran
+1|2|F|Forensic Medicine|Mayorathan
+1|3|M|Tutorial: Clinical microbiology Gr 3&4|Valarmathy
+1|4|P|Practical: Bone, joint, soft tissue & skin pathology Gr 1&2|Dept staff
+2|1|O|Self learning|
+2|2-3|P|CPC: GIT|Gobishangar
+2|4|P|Tutorial: Bone, joint, soft tissue & skin pathology Gr 3&4|Dept staff
+3|1-2|P|Bone tumours|Sasikaran
+3|3|M|Tutorial: Virology Gr 1&2|Kalamathy
+3|4|M|Tutorial: Clinical microbiology Gr 3&4|Valarmathy
+4|1|P|Tutorial: Bone, joint, soft tissue & skin pathology Gr 1&2|Dept staff
+4|2|C|Quiz: Musculoskeletal system|Navaratinaraja
+4|3|M|Tutorial: Virology Gr 3&4|Kalamathy
+4|4|M|Tutorial: Clinical microbiology Gr 1&2|Valarmathy`;
+const ST=["2026-11-02","2026-11-09","2026-11-16","2026-11-23","2026-11-30","2026-12-07","2027-01-04","2027-01-11","2027-01-18","2027-01-25"];
+const DN=["Mon","Tue","Wed","Thu","Fri"],MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const SUB={P:["Pathology","#e11d48"],S:["Surgery","#2563eb"],M:["Microbiology","#16a34a"],Pd:["Paediatrics","#d97706"],C:["CPT","#7c3aed"],F:["Forensic","#64748b"],D:["DCFM","#0891b2"],Pa:["Parasitology","#c026d3"],O:["","#94a3b8"]};
+const I=[1,3,7,14,30,60];
+const pad=n=>String(n).padStart(2,"0");
+const ymd=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const add=(s,n)=>{const d=new Date(s+"T00:00:00");d.setDate(d.getDate()+n);return ymd(d)};
+const diff=(a,b)=>Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/864e5);
+const today=()=>ymd(new Date());
+const fd=s=>{const d=new Date(s+"T00:00:00");return d.getDate()+" "+MO[d.getMonth()]};
+const tm=t=>{const a=t.split("-");return a[0]+"–"+(+a[a.length-1]+1)+"pm"};
+let w=-1,fc=0;const items=[],K={};
+RAW.split("\n").forEach(l=>{if(!l)return;if(l[0]=="#"){w++;return}const[d,t,sj,x,doc]=l.split("|");if(sj=="O")return;
+let n=x.indexOf("CBL")==0?"CBL: CVS & RS":x.replace(/\s*Gr\.? ?[\d&]+.*$/,"");
+if(sj=="F")n="Forensic Medicine – lecture "+(++fc);
+const k=sj+n;if(!K[k]){K[k]={id:"t"+items.length,s:sj,x:n,docs:[],dates:[]};items.push(K[k])}
+const o=K[k],dt=add(ST[w],+d);if(doc&&o.docs.indexOf(doc)<0)o.docs.push(doc);if(o.dates.indexOf(dt)<0)o.dates.push(dt)});
+let S={};try{S=JSON.parse(localStorage.getItem("term9")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("term9",JSON.stringify(S))}catch(e){}};
+let cur=0,sb="P",fl=0;
+function act(a,id){const t=today(),r=S[id];
+if(a=="s")S[id]={n:0,due:add(t,1)};
+else if(a=="u")delete S[id];
+else if(a=="r"){r.n++;if(r.n>=6){r.m=1;delete r.due}else r.due=add(t,I[r.n])}
+else if(a=="f"){r.n=0;delete r.m;r.due=add(t,1)}
+save();draw()}
+function stat(id){const r=S[id];if(!r)return"";if(r.m)return"🏆 Mastered";const k=diff(today(),r.due);return"Reviews done "+r.n+"/6 · next "+(k<=0?"<b>due now</b>":k==1?"tomorrow":"in "+k+" days ("+fd(r.due)+")")}
+function card(i,rv){const c=SUB[i.s][1],r=S[i.id];
+let h='<div class="it'+(r&&r.m?" mast":"")+'" style="--c:'+c+'"><div class="top"><span class="tag">'+SUB[i.s][0]+'</span><span>'+i.dates.map(fd).join(" · ")+'</span></div><div class="tp">'+i.x+'</div>'+(i.docs.length?'<div class="dr">'+i.docs.join(", ")+'</div>':"")+'<div class="row">';
+if(rv)h+='<button class="ok" onclick="act(\'r\',\''+i.id+'\')">Reviewed</button><button class="no" onclick="act(\'f\',\''+i.id+'\')">Forgot</button><span class="st">'+stat(i.id)+'</span>';
+else if(!r)h+='<button onclick="act(\'s\',\''+i.id+'\')">Mark studied</button>';
+else h+='<span class="st">✅ '+stat(i.id)+'</span><button class="g" onclick="act(\'u\',\''+i.id+'\')">Undo</button>';
+return h+'</div></div>'}
+function draw(){const t=today(),T=items;
+const due=T.filter(i=>S[i.id]&&!S[i.id].m&&S[i.id].due<=t).sort((a,b)=>S[a.id].due<S[b.id].due?-1:1);
+document.getElementById("bd").innerHTML=due.length?'<span class="bd">'+due.length+'</span>':"";
+[0,1,2].forEach(k=>document.getElementById("n"+k).className=k==cur?"on":"");
+let h="";
+if(cur==0){const ks=Object.keys(SUB).filter(k=>k!="O"),L=T.filter(i=>i.s==sb),dn=L.filter(i=>S[i.id]).length;
+h='<div class="chips">'+ks.map(k=>'<button class="chip'+(k==sb?" on":"")+'" onclick="sb=\''+k+'\';draw()">'+SUB[k][0]+' '+T.filter(i=>i.s==k&&S[i.id]).length+'/'+T.filter(i=>i.s==k).length+'</button>').join("")+'</div>';
+h+='<div class="chips" style="padding-top:0">'+["All","To study","Studied"].map((n,k)=>'<button class="chip'+(k==fl?" on":"")+'" onclick="fl='+k+';draw()">'+n+'</button>').join("")+'</div>';
+h+='<div class="pg" style="margin:4px 16px 8px"><b style="color:'+SUB[sb][1]+'">'+SUB[sb][0]+'</b> <span class="st">'+dn+'/'+L.length+' topics studied</span><div class="bar"><i style="width:'+(dn/L.length*100)+'%;background:'+SUB[sb][1]+'"></i></div></div>';
+const F=L.filter(i=>fl==0||(fl==1)==!S[i.id]);
+h+=F.length?'<div class="day">'+F.map(i=>card(i,0)).join("")+'</div>':'<div class="empty">No topics here.</div>'}
+else if(cur==1){h='<h2>Due for review ('+due.length+')</h2>';
+h+=due.length?"<div class='day'>"+due.map(i=>card(i,1)).join("")+"</div>":'<div class="empty">Nothing due. 🎉<br>Mark topics as studied in the Subjects tab.</div>';
+const up=T.filter(i=>S[i.id]&&!S[i.id].m&&S[i.id].due>t).sort((a,b)=>S[a.id].due<S[b.id].due?-1:1);
+if(up.length)h+='<h2>Upcoming ('+up.length+')</h2><div class="day">'+up.map(i=>card(i,1).replace(/<button class="ok".*?<\/button>/,"")).join("")+'</div>'}
+else{const st=T.filter(i=>S[i.id]).length,m=T.filter(i=>S[i.id]&&S[i.id].m).length,p=Math.round(st/T.length*100);
+h='<div class="grid"><div class="pg"><div class="big">'+st+'/'+T.length+'</div>topics studied<div class="bar"><i style="width:'+p+'%"></i></div></div><div class="pg"><div class="big">'+m+'</div>mastered 🏆</div><div class="pg"><div class="big">'+due.length+'</div>due now</div><div class="pg"><div class="big">'+(st-m)+'</div>in review cycle</div></div><h2>By subject</h2>';
+for(const k in SUB){if(k=="O")continue;const a=T.filter(i=>i.s==k),b=a.filter(i=>S[i.id]).length;h+='<div class="pg" style="margin:8px 16px"><b style="color:'+SUB[k][1]+'">'+SUB[k][0]+'</b> <span class="st">'+b+'/'+a.length+'</span><div class="bar"><i style="width:'+(b/a.length*100)+'%;background:'+SUB[k][1]+'"></i></div></div>'}
+h+='<div class="sub" style="padding:12px 16px">Review gaps: 1 · 3 · 7 · 14 · 30 · 60 days. Progress is saved on this device.</div>'}
+document.getElementById("v").innerHTML=h}
+function tab(k){cur=k;draw();scrollTo(0,0)}
+draw();
+</script></body></html>
